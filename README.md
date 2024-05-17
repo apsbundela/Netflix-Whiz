@@ -1,6 +1,9 @@
 # Netflix whiz
 - create React app
 - Configured tailwind css
+- Header
+- Login Form
+
 
 #Features
 -Login/SignUp
