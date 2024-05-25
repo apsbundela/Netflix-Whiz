@@ -4,13 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
-import { LOGO, USER_AVTAR } from '../utils/constant';
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVTAR } from '../utils/constant';
+import { setGptToggle } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user)
+    const isGptSearch = useSelector((store) => store.gpt.isGptSearch)
+
+    // const isSearch = useSelector((store) => store.gpt.isGptSearch)
     const signOutHandler = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -20,6 +25,13 @@ const Header = () => {
         });
     }
 
+    const handleToggle = () => {
+        dispatch(setGptToggle())
+    }
+
+    const handleLanguageChange = (e) => {
+        dispatch(changeLanguage(e.target.value))
+    }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -46,13 +58,28 @@ const Header = () => {
                 src={LOGO}
                 alt='logo'
             />
-            <div className='flex'>
-                <img src={USER_AVTAR} />
-                {user &&
-                    <p className='absolute mt-8'>{user.displayName}</p>
-                }
-                <button className='text-white ml-2' onClick={signOutHandler}>Sign out</button>
-            </div>
+            {user && (
+                <div className='flex p-2 items-center'>
+                    {
+                        isGptSearch &&
+                        <select className='p-2 m-2 bg-gray-600 text-white' onChange={handleLanguageChange}>
+                            {
+                                SUPPORTED_LANGUAGES.map((lang) => (<option key={lang.identifier} value={lang.identifier}>{lang.name}</option>))
+                            }
+                        </select>
+                    }
+
+                    <button className='bg-red-600 py-2 px-4 m-3 text-white'
+                        onClick={handleToggle}
+                    >{isGptSearch ? "Home" : "GPT Search"}</button>
+                    <img className='w-12 h-12' src={USER_AVTAR} />
+                    {/* <p className='absolute -mr-12 mt-8 text-white'>{user.displayName}</p> */}
+                    <button className='text-white ml-2' onClick={signOutHandler}>Sign out</button>
+                </div>
+
+            )}
+
+
 
         </div>
     )

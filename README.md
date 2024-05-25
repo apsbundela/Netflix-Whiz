@@ -30,6 +30,10 @@
 - Embded the Youtube video and make it autoplay and mute
 - Built Secondary container
 - Called Popuplar, upcoming , trending movies API from TMDB
+- GPT search page
+- GPT serach bar
+- MultiLanguage support
+
 
 
 
