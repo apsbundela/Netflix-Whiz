@@ -6,7 +6,7 @@ export const validate = (email, password) => {
 
     if (!isEmailValid && !isPasswordValid) return "Email and Password are not valid";
     if (!isEmailValid) return "Email is not valid";
-    if (!isPasswordValid) return "Password is not valid";
+    if (!isPasswordValid) return "Password should have at least 8 characters, one digit, one lowercase letter, one uppercase letter, one special character.";
 
     return null;
 }

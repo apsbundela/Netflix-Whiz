@@ -18,3 +18,4 @@ export const SUPPORTED_LANGUAGES = [
 ]
 
 export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY
+export const API_EXPIRED_WARNING_MESSAGE = 'If you can not see any data after logging in, the API key may have expired or been exhausted'

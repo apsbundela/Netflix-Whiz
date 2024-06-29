@@ -6,12 +6,15 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { LOGIN_BACKGROUND_IMAGE } from '../utils/constant';
+import WarningLine from './WarningLine';
 
 const Login = () => {
     const dispatch = useDispatch();
     const [isSignIn, setSignIn] = useState(true);
     const [validationErrorMessage, setValidationErrorMessage] = useState(null);
     const [formSubmissionErrorMessage, setFormSubmissionErrorMessage] = useState(null);
+    const [signInErrorMessage, setSignInErrorMessage] = useState(null);
+
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
@@ -46,7 +49,7 @@ const Login = () => {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    setFormSubmissionErrorMessage(error.code + "-" + error.message)
+                    setFormSubmissionErrorMessage(error.message)
                 });
 
         } else {
@@ -56,8 +59,8 @@ const Login = () => {
                     const user = userCredential.user;
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
+                    setSignInErrorMessage(error.message)
                 });
         }
     }
@@ -67,12 +70,13 @@ const Login = () => {
             <Header />
             <div className='absolute'>
                 <img
+                    className='h-screen object-cover md:object-none'
                     src={LOGIN_BACKGROUND_IMAGE}
                     alt='background'
                 />
             </div>
-            <form onClick={(e) => e.preventDefault()} className=' absolute bg-black w-3/12 p-12 my-60 mx-auto right-0 left-0 text-white bg-opacity-75'>
-                <h1 className='font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
+            <form onClick={(e) => e.preventDefault()} className=' absolute bg-black w-full md:w-3/12 p-12 my-44 md:my-56 mx-auto right-0 left-0 text-white bg-opacity-75'>
+                <h1 className='font-bold text-xl md:text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
                 {
                     !isSignIn &&
                     <input
@@ -101,6 +105,8 @@ const Login = () => {
                 >{isSignIn ? "Sign In" : "Sign Up"}</button>
 
                 <p className='p-2 text-red-500'>{validationErrorMessage}</p>
+                <p className='p-2 text-red-500'>{formSubmissionErrorMessage}</p>
+                <p className='p-2 text-red-500'>{signInErrorMessage}</p>
                 <p className='p-2 cursor-pointer' onClick={signInToggleHandler}> {isSignIn ? "New to Netflix? Sign Up Now" : "Already registered. Sign In Now"}</p>
             </form>
         </div>

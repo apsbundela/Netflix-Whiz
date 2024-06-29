@@ -33,6 +33,11 @@
 - GPT search page
 - GPT serach bar
 - MultiLanguage support
+- GPT 
+- GPT search
+- Memonizations
+- .env file
+- Responsivness
 
 
 

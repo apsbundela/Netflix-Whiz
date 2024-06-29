@@ -18,6 +18,8 @@ const GptSearchBar = () => {
     }
 
     const handleGPTSearch = async () => {
+
+        // ********************** OPEN AI API is 
         // const gptResults = await openai.chat.completions.create({
         //     messages: [{ role: 'user', content: gptSearchQuery }],
         //     model: 'gpt-3.5-turbo',
@@ -36,8 +38,8 @@ const GptSearchBar = () => {
 
     }
     return (
-        <div className='pt-[10%] flex justify-center'>
-            <form className='w-1/2 bg-black grid grid-cols-12' onSubmit={(e) => e.preventDefault()}>
+        <div className='pt-[35%] md:pt-[10%] flex justify-center'>
+            <form className='w-full md:w-1/2 bg-black grid grid-cols-12' onSubmit={(e) => e.preventDefault()}>
                 <input type='text' className='p-4 m-4 col-span-9' placeholder={lang?.[langCode]?.placeholder}></input>
                 <button className='py-2 px-4 bg-red-700 m-4 col-span-3 rounded-lg text-white' onClick={handleGPTSearch}>{lang?.[langCode]?.search}</button>
             </form>
