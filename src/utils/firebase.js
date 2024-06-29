@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { FIREBASE_KEY } from "./constant";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -9,7 +10,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBFZtM_5caRINAT-kajo0Qx5v3XYAsRR14",
+    apiKey: FIREBASE_KEY,
     authDomain: "netflix-whiz.firebaseapp.com",
     projectId: "netflix-whiz",
     storageBucket: "netflix-whiz.appspot.com",
